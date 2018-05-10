@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spectral Centroid example</title>
+  <style>
+  div{
+    position:relative;
+  }
+  </style>
+  <script src="jsXtract.js"></script>
+  <script src="util.js"></script>
+  <script src="../dist/FAD.js"></script>
+  <script>
+
+  function createDisplay(buffer){
+    let audio = buffer.getChannelData(0);
+    let sc = getSignal(audio, "spectral_centroid");
+    let wave = new fad.Signal(audio, audioCtx.sampleRate);
+    let display = new fad.Display("container", "wave", 800, 200);
+    wave.draw(display,[sc.smooth(20).normalize().scale(360), 70, 50]);
+  }
+
+  window.onload = function() {
+    loadAudioFile(
+      "wav/beat.wav",
+      (audio) => createDisplay(audio)
+    );
+  };
+  </script>
+
+</head>
+<body>
+  <div id="container"></div>
+</body>
+</html>

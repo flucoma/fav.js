@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spectrogram example</title>
+
+  <style>
+  div{
+    position:relative;
+  }
+  </style>
+  <script src="jsXtract.js"></script>
+  <script src="util.js"></script>
+  <script src="../dist/FAD.js"></script>
+  <script>
+
+  function createDisplay(buffer){
+    let audio = buffer.getChannelData(0);
+    let desc = getSignal(audio, "spectrum");
+    let rms = getSignal(audio, "rms");
+    let display = new fad.Display("container1", "image", 800, 200);
+    display.addLayer("fill");
+    desc.log().normalize().draw(display[0]);
+    rms.smooth(20).threshold(0.05).draw(display[1],"rgba(100,0,0,0.3)");
+  }
+
+  window.onload = function() {
+    loadAudioFile(
+      "wav/sax.wav",
+      (audio) => createDisplay(audio)
+    );
+  };
+  </script>
+
+</head>
+<body>
+  <div id="container1"></div>
+</body>
+</html>

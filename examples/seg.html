@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RMS-based Segmentation example</title>
+  <style>
+  div {
+    position:relative;
+  }
+  </style>
+  <script src="jsXtract.js"></script>
+  <script src="util.js"></script>
+  <script src="../dist/FAD.js"></script>
+  <script>
+  var buffer;
+
+  function createDisplay(thresh){
+    let audioL = buffer.getChannelData(0);
+    let waveL = new fad.Signal(audioL, audioCtx.sampleRate);
+    let rmsL = getSignal(audioL, "rms", 1024, 16);
+
+    let audioR = buffer.getChannelData(1);
+    let waveR = new fad.Signal(audioR, audioCtx.sampleRate);
+    let rmsR = getSignal(audioR, "rms", 1024, 16);
+
+    let waveM = waveL.add(waveR).scale(0.5);
+    let rmsM = getSignal(waveM.data, "rms", 1024, 16);
+    let displayM = new fad.Display("containerM", "wave", 1800, 120);
+    displayM.addLayer("fill");
+    waveM.draw(displayM[0],"black");
+    rmsM.draw(displayM[1], "rgba(9, 123, 255, 0.4)", 1);
+
+    let displayZoom = new fad.Display("containerZ", "wave", 1800, 240);
+    displayZoom.addLayer("fill");
+    displayZoom.addLayer("line");
+    displayZoom.addLayer("fill");
+    let part = waveM.slice(0.02321995,0.52321995,"seconds");
+    part.draw(displayZoom[0],"black");
+    let partRMS = rmsM.slice(0,0.5,"seconds");
+    partRMS
+    .draw(displayZoom[1],"rgba(9, 123, 255, 0.4)", 1)
+    .diff().normalize().slide(1,10)
+    .draw(displayZoom[2], "rgba(0, 0, 255, 0.7)",2)
+    .schmitt(0.6,0.3).or(partRMS.slide(1,10).threshold(thresh))
+    .draw(displayZoom[3], "rgba(0, 0, 0, 0.1)",3);
+  }
+
+  function updateThresh() {
+    var x = document.getElementById("inForm");
+    createDisplay(parseFloat(x.elements[0].value));
+  }
+
+  window.onload = function() {
+    loadAudioFile(
+      "wav/loop.wav",
+      (audio) => {buffer = audio;createDisplay(0.05)}
+    );
+  };
+  </script>
+</head>
+<body >
+  <form id="inForm">
+    Threshold: <input type="text" name="inThresh" value="0.05">
+  </form>
+  <button onclick="updateThresh()">Update</button>
+  <br>
+  <br>Overview:
+  <div id="containerM"></div>
+  <br>Detail of segmentation:
+  <div id="containerZ"></div>
+</body>
+</html>
