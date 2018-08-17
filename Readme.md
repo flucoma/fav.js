@@ -1,3 +1,3 @@
-## fad.js
+## fav.js
 
-A javascript library for flexible audio displays
+A javascript library for flexible audio visualization
