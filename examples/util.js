@@ -53,5 +53,5 @@ let getSignal = function(audio, name, windowSize = 1024, hopSize = 256){
     let frame = audio.slice(start, end);
     desc[n] = frameExtractors[name](frame);
   }
-  return new fad.Signal(desc, sr/hopSize);
+  return new fav.Signal(desc, sr/hopSize);
 }

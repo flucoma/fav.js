@@ -13,7 +13,7 @@
 
   <script src="jsXtract.js"></script>
   <script src="util.js"></script>
-  <script src="../dist/FAD.js"></script>
+  <script src="../dist/FAV.js"></script>
   <script>
 
   function createDisplay(buffer, container){
@@ -22,7 +22,7 @@
     let rms = getSignal(audio ,"rms");
     let centroid = getSignal(audio,"spectral_centroid");
     let skew = getSignal(audio,"spectral_skewness");
-    let display = new fad.Display(container,"errorbar", 300, 225);
+    let display = new fav.Display(container,"errorbar", 300, 225);
     for(i = 0; i < 3; i++) display.addLayer("errorbar");
     zcr.draw(display[0],"rgba(255,9,123,0.4)");
     rms.draw(display[1],"rgba(123,9,255,0.4)");

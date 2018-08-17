@@ -11,27 +11,27 @@
   </style>
   <script src="jsXtract.js"></script>
   <script src="util.js"></script>
-  <script src="../dist/FAD.js"></script>
+  <script src="../dist/FAV.js"></script>
   <script>
   var buffer;
 
   function createDisplay(thresh){
     let audioL = buffer.getChannelData(0);
-    let waveL = new fad.Signal(audioL, audioCtx.sampleRate);
+    let waveL = new fav.Signal(audioL, audioCtx.sampleRate);
     let rmsL = getSignal(audioL, "rms", 1024, 16);
 
     let audioR = buffer.getChannelData(1);
-    let waveR = new fad.Signal(audioR, audioCtx.sampleRate);
+    let waveR = new fav.Signal(audioR, audioCtx.sampleRate);
     let rmsR = getSignal(audioR, "rms", 1024, 16);
 
     let waveM = waveL.add(waveR).scale(0.5);
     let rmsM = getSignal(waveM.data, "rms", 1024, 16);
-    let displayM = new fad.Display("containerM", "wave", 1800, 120);
+    let displayM = new fav.Display("containerM", "wave", 1800, 120);
     displayM.addLayer("fill");
     waveM.draw(displayM[0],"black");
     rmsM.draw(displayM[1], "rgba(9, 123, 255, 0.4)", 1);
 
-    let displayZoom = new fad.Display("containerZ", "wave", 1800, 240);
+    let displayZoom = new fav.Display("containerZ", "wave", 1800, 240);
     displayZoom.addLayer("fill");
     displayZoom.addLayer("line");
     displayZoom.addLayer("fill");

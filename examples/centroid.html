@@ -11,14 +11,14 @@
   </style>
   <script src="jsXtract.js"></script>
   <script src="util.js"></script>
-  <script src="../dist/FAD.js"></script>
+  <script src="../dist/FAV.js"></script>
   <script>
 
   function createDisplay(buffer){
     let audio = buffer.getChannelData(0);
     let sc = getSignal(audio, "spectral_centroid");
-    let wave = new fad.Signal(audio, audioCtx.sampleRate);
-    let display = new fad.Display("container", "wave", 800, 200);
+    let wave = new fav.Signal(audio, audioCtx.sampleRate);
+    let display = new fav.Display("container", "wave", 800, 200);
     wave.draw(display,[sc.smooth(20).normalize().scale(360), 70, 50]);
   }
 

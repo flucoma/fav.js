@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RMS fade example</title>
+  <title>RMS fave example</title>
   <style>
   div{
     position:relative;
@@ -11,14 +11,14 @@
   </style>
   <script src="jsXtract.js"></script>
   <script src="util.js"></script>
-  <script src="../dist/FAD.js"></script>
+  <script src="../dist/FAV.js"></script>
   <script>
 
   function createDisplay(buffer){
     let audio = buffer.getChannelData(0);
     let rms = getSignal(audio, "rms");
-    let wave = new fad.Signal(audio, audioCtx.sampleRate);
-    let display2 = new fad.Display("container", "wave", 800, 200);
+    let wave = new fav.Signal(audio, audioCtx.sampleRate);
+    let display2 = new fav.Display("container", "wave", 800, 200);
     wave.draw(display2,[237,100,rms.normalize().reflect().scale(70).offset(30)]);
   }
 

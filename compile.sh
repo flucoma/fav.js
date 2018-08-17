@@ -1,1 +1,1 @@
-browserify src/api.js --standalone fad -o dist/FAD.js
+browserify src/api.js --standalone fav -o dist/FAV.js
