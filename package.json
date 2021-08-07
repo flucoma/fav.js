@@ -1,0 +1,31 @@
+{
+  "name": "fav.js",
+  "version": "0.0.1",
+  "description": "A javascript library for flexible audio visualization",
+  "main": "FAV.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify src/api.js --standalone fav -o dist/FAV.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flucoma/fav.js.git"
+  },
+  "keywords": [
+    "audio",
+    "visualization"
+  ],
+  "author": "Gerard Roma",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/flucoma/fav.js/issues"
+  },
+  "homepage": "https://github.com/flucoma/fav.js#readme",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "js-xtract": "^1.2.0"
+  }
+}
