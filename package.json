@@ -1,5 +1,5 @@
 {
-  "name": "fav.js",
+  "name": "@flucoma/fav.js",
   "version": "0.0.1",
   "description": "A javascript library for flexible audio visualization",
   "main": "FAV.js",
