@@ -1,8 +1,12 @@
 {
-  "name": "fav.js",
+  "name": "@flucoma/fav",
   "version": "0.0.1",
   "description": "A javascript library for flexible audio visualization",
-  "main": "FAV.js",
+  "main": "dist/FAV.js",
+  "files": [
+	"dist/FAV.js",
+	"src/*.js"
+  ],
   "directories": {
     "example": "examples"
   },
