@@ -13,7 +13,7 @@ module.exports = {
       if(bucketStart > this.data.length - 1 ) bucketStart = this.data.length -1;
       if(bucketEnd > this.data.length -1 ) bucketEnd = this.data.length -1;
       if(bucketStart === bucketEnd) {
-        if(i>0) newData[i]  = newData[i-1];
+        newData[I] = this.data[bucketStart];
       }
       else newData[i]  = stats[method](this.data.slice(bucketStart, bucketEnd));
     }
